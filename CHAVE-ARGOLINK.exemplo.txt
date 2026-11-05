@@ -1,0 +1,5 @@
+Copie este arquivo para CHAVE-ARGOLINK.txt (na mesma pasta) e cole a sua chave do ArgoLink
+numa linha sozinha, começando por sk-
+
+O CHAVE-ARGOLINK.txt nunca vai para o GitHub (está no .gitignore).
+Outra opção: defina a variável de ambiente ARGOLINK_API_KEY antes de iniciar o estúdio.

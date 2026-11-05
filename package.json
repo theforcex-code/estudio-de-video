@@ -1,0 +1,15 @@
+{
+  "name": "estudio-de-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Estúdio de vídeo local com quadro de nodes para gerar vídeos pelo ArgoLink (Seedance, MiniMax H3, Grok).",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0"
+  }
+}

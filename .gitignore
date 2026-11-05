@@ -1,0 +1,28 @@
+# Só o código vai para o repositório. Tudo o que é gerado, enviado ou pessoal fica de fora.
+
+# Chave do ArgoLink: cada pessoa usa a sua (ver CHAVE-ARGOLINK.exemplo.txt)
+CHAVE-ARGOLINK.txt
+.env
+
+# Mídia, histórico de gerações e recados do quadro
+uploads/
+videos-gerados/
+jobs.json
+public/inbox.json
+
+# Ferramentas: entram só os scripts; binários, modelos, ambiente Python e renders ficam de fora
+ferramentas/*
+!ferramentas/logo3d/
+ferramentas/logo3d/*
+!ferramentas/logo3d/*.py
+!ferramentas/logo3d/*.md
+!ferramentas/logo3d/blender/
+ferramentas/logo3d/blender/*
+!ferramentas/logo3d/blender/*.py
+!ferramentas/travar/
+ferramentas/travar/*
+!ferramentas/travar/*.py
+
+node_modules/
+__pycache__/
+*.pyc

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estúdio de Vídeo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="brand"><span class="brand-dot"></span>Estúdio</div>
+    <nav class="add">
+      <button id="add" class="primary">+ Adicionar</button>
+      <button id="assets-toggle">Arquivos</button>
+    </nav>
+    <div class="bar-right">
+      <button id="fit" title="Centralizar tudo">Centralizar</button>
+      <div id="spent" class="chip" title="Soma do que foi cobrado hoje nas gerações deste estúdio">Hoje US$ 0,00</div>
+      <div id="balance" class="chip">Saldo…</div>
+    </div>
+  </header>
+
+  <main id="canvas">
+    <div id="world">
+      <svg id="wires" width="1" height="1"></svg>
+    </div>
+    <div class="hint">Arraste o fundo para selecionar · Espaço, botão do meio ou direito + arrastar para mover o quadro · duplo clique para adicionar · Ctrl+C / Ctrl+V / Ctrl+D · Delete apaga</div>
+  </main>
+
+  <aside id="assets" hidden>
+    <div class="assets-head"><b>Arquivos</b><span class="meta">arraste um vídeo para o quadro para usar o último frame</span></div>
+    <div id="assets-list"></div>
+  </aside>
+
+  <div id="toasts"></div>
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>
