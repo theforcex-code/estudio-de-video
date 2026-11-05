@@ -26,3 +26,7 @@ ferramentas/travar/*
 node_modules/
 __pycache__/
 *.pyc
+
+# Link de convidados: codigo de acesso, ultimo link e o programa do tunel
+ACESSO.txt
+LINK-COMPARTILHAR.txt

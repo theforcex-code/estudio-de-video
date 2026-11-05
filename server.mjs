@@ -850,9 +850,36 @@ const pageBuild = () => Math.max(...readdirSync(PUBLIC).map((f) => statSync(join
 // Só nomes simples: nada de "../" escapando das pastas.
 const safe = (name) => basename(decodeURIComponent(name));
 
+// ---------- Acesso pelo link compartilhado ----------
+// Quem abre no próprio computador entra direto. Quem chega pelo túnel (link da internet) precisa do código
+// de acesso: vem uma vez no link (?acesso=…), vira um cookie e o endereço fica limpo.
+const ACCESS_FILE = join(HERE, "ACESSO.txt");
+const accessCode = () => process.env.ESTUDIO_ACESSO || (existsSync(ACCESS_FILE) ? readFileSync(ACCESS_FILE, "utf8").trim() : "");
+const viaTunnel = (req) => Boolean(req.headers["cf-connecting-ip"] || req.headers["x-forwarded-for"]);
+const cookieOf = (req, name) => (req.headers.cookie || "").split(/;\s*/).find((c) => c.startsWith(name + "="))?.slice(name.length + 1);
+
+function allowed(req, res, url) {
+  if (!viaTunnel(req)) return true;
+  const code = accessCode();
+  if (code && url.searchParams.get("acesso") === code) {
+    url.searchParams.delete("acesso");
+    res.writeHead(302, {
+      "Set-Cookie": `estudio_acesso=${code}; Path=/; Max-Age=31536000; HttpOnly; Secure; SameSite=Lax`,
+      Location: url.pathname + url.search,
+    });
+    res.end();
+    return false;
+  }
+  if (code && cookieOf(req, "estudio_acesso") === code) return true;
+  res.writeHead(401, { "Content-Type": "text/html; charset=utf-8" });
+  res.end("<!doctype html><meta charset=utf-8><title>Estúdio</title><p style='font:16px system-ui;margin:3em'>Este estúdio é só para convidados. Peça o link de acesso a quem te convidou.</p>");
+  return false;
+}
+
 const server = createServer(async (req, res) => {
   const url = new URL(req.url, "http://localhost");
   const p = url.pathname;
+  if (!allowed(req, res, url)) return;
   try {
     if (p === "/api/status" && req.method === "GET") {
       const build = pageBuild();
